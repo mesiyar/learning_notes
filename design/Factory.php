@@ -1,5 +1,6 @@
 <?php
 
+//工厂模式 实验
 class Factory
 {
     static function getA()
