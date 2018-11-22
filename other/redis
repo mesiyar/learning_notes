@@ -1,0 +1,5 @@
+redis 启动:
+  1. redis-cli &  直接后台启动
+  2. redis-cli /xxx/xxx.conf 指定配置文件
+redis 设置密码:
+  
