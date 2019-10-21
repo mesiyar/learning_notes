@@ -13,4 +13,8 @@
   
 ```
 
-## 3.正则表达式
+## 3.下拉默认选中
+```
+  $("#xxx option[value='xxx']").prop("selected",true);
+```
+## 4.
