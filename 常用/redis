@@ -1,0 +1,8 @@
+redis 启动:
+  1. redis-cli &  直接后台启动
+  2. redis-cli /xxx/xxx.conf 指定配置文件
+redis 设置密码:
+  1.临时设置redis密码  在redis-cli 中执行 config set requirepass 密码
+  2.永久性设置密码:在redis.conf 中找到requirepass 打开注释并设置对应密码即可
+
+  

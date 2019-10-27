@@ -6,6 +6,10 @@
  * Time: 10:37
  */
 
+/**
+ * 监控一个目录下的文件变化的函数
+ * Class FileWatch
+ */
 class FileWatch
 {
 
