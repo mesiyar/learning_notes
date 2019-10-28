@@ -56,7 +56,71 @@ char比varchar高
 ### 4.7 索引的存储结构
 * btree:搜索多叉树,节点内关键字有序排列,关键字之间有个指针
 * b+tree:由btree升级而来,数据和关键字存储在一起,省去了关键之到数据的映射找数据的时间
-## 5 缓存
+## 5 查询缓存
+* 查询缓存:将selct查询的结果缓存起来,key为sql语句,value为查询结果(如果sql功能一样但是sql语句有改动都会导致key的不匹配)
+* 开启方式:query_cache_type (0 不开启;1 开启,默认缓存每条select,如需针对某个sql不缓存 则:select sql_no_cache xxx;2 默认都不缓存通过 select sql_cache 制定缓存哪一条)
+* 缓存大小设置:query_cache_size
+* 重置缓存:reset query cache
+* 缓存失效: 对表的结构进行改动会导致缓存失效
+## 6 分区
+概念:默认情况下 一张表的数据都是存储在一组存储结构中的,但是当数据量比较大时需要将数据分到多个存储文件中,保证单个文件的处理效率
+* 分区逻辑:hash分区、key分区、range、list
+* 分区管理:创建分区(create table xxx partition by key(xxx) partitions 10;alter table xxx add partition ? )
+* 分区字段应选择常用的检索字段,否则意义不大
+## 7 水平分区和垂直分区
+*水平分区  所有分区的表结构都相同 ,每张表都保证了唯一性
+*垂直分区  分割字段到多张表,这些表的记录都是一一对应的
+## 8 集群
+* 主从复制
+
+mysql的主从复制，是用来建立一个和主数据库完全一样的数据库环境，称为从数据库，主数据库一般是实时的业务数据操作，从数据库常用的读取为主。
+
+优点主要有
+
+1，可以作为备用数据库进行操作，当主数据库出现故障之后，从数据库可以替代主数据库继续工作，不影响业务流程
+
+2，读写分离，将读和写应用在不同的数据库与服务器上。一般读写的数据库环境配置为，一个写入的数据库，一个或多个读的数据库，各个数据库分别位于不同的服务器上，充分利用服务器性能和数据库性能；当然，其中会涉及到如何保证读写数据库的数据一致，这个就可以利用主从复制技术来完成。
+
+3，吞吐量较大，业务的查询较多，并发与负载较大。
+
+```sql
+1,首先在主机上赋予丛机的权限，如果有多台从机的话，就赋予多次：
+GRANT REPLICATION SLAVE ON *.* TO slave@'xx' IDENTIFIED BY 'xxx';
+
+2,然后就需要设置主机数据库的my.cnf,设置主机标识的service-id,确保可写的二进制log_bin文件，具体如下：
+server_id=1#主机的标识
+log-bin=mysql-bin.log#确保可写入的日志文件
+binlog_format=mixed#二进制日志的格式，
+
+binlog-do-db=master#允许主从复制数据库
+binlog-ignore-db=mysql#不允许主从复制的数据库
+~~~~~~~~~~~~~~~~~~~~重新启动mysql服务
+
+3，配置丛机的配置，同样也是在my.cnf的配置文件中，注意service_id不可重复：
+server_id=2#主机的标识
+log-bin=mysql-bin.log#确保可写入的日志文件
+binlog_format=mixed#二进制日志的格式，
+replicate_wild_do_table=oldboy.%
+replicate_wild_ignore_table=mysql.%
+
+4，给主机的（1）mysql  锁表，（2）查询master的状态，并（3）解锁：
+
+(1)flush tables with read lock;
+(2)show master status;（是查看当前bin-log日志的位置点）
+(3)unlock tables;
+5,在从库上链接主数据库，链接数据master_host='是主机的ip' 依次在数据上执行：
+stop slave;
+
+change master to master_host='119.27.169.173',master_user='slave',master_password='1234',master_log_file='mysql-bin.000006',master_log_pos=245;
+
+start slave;
+
+6,最后查看slave的状态：show slave status;
+当Slave_IO_Running和Slave_SQL_Running线程都为yes是主从复制配置成功！
+
+```
+
+
 
  
 
