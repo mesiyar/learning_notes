@@ -49,9 +49,3 @@ class Stack
         var_dump($this->_data);
     }
 }
-
- $stack = new Stack;
- $stack->push('php');
- $stack->push('java');
- $stack->push('golang');
- $stack->push('python');
