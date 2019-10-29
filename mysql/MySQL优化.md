@@ -87,7 +87,8 @@ mysql的主从复制，是用来建立一个和主数据库完全一样的数据
 1,首先在主机上赋予丛机的权限，如果有多台从机的话，就赋予多次：
 GRANT REPLICATION SLAVE ON *.* TO slave@'xx' IDENTIFIED BY 'xxx';
 
-2,然后就需要设置主机数据库的my.cnf,设置主机标识的service-id,确保可写的二进制log_bin文件，具体如下：
+2,然后就需要设置主机数据库的my.cnf,设置主机标识的service-id,
+确保可写的二进制log_bin文件，具体如下：
 server_id=1#主机的标识
 log-bin=mysql-bin.log#确保可写入的日志文件
 binlog_format=mixed#二进制日志的格式，
