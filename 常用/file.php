@@ -67,7 +67,7 @@ class FileWatch
             }
         }
     }
-}//endclass
+}
 //使用方法
 class mywatch extends FileWatch
 {
