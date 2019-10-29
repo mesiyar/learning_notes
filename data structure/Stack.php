@@ -9,11 +9,11 @@
  * $stack->push('java');
  * $stack->push('golang');
  * $stack->push('python');
- *  echo $stack->pop();// python
- *  echo $stack->pop();// golang
- *  echo $stack->pop();// java
- *  echo $stack->pop();// php
- *  echo $stack->pop();// false
+ * echo $stack->pop();// python
+ * echo $stack->pop();// golang
+ * echo $stack->pop();// java
+ * echo $stack->pop();// php
+ * echo $stack->pop();// false
  */
 
 class Stack
@@ -32,6 +32,10 @@ class Stack
         $this->_data[$this->_end] = $data;
     }
 
+    /**
+     * 出栈
+     * @return bool|mixed
+     */
     public function pop()
     {
         if (!$this->_end) return false;

@@ -5,6 +5,7 @@
  * Date: 2018/3/8
  * Time: 下午11:54
  */
+
 // 抽象类
 abstract class Test
 {
