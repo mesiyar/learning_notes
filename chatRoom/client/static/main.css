@@ -1,0 +1,51 @@
+#main-body {
+    height: 400px;
+    width: 800px;
+    border: 1px solid slategrey;
+    background: #F2EEab;
+    position: absolute;
+    padding: 10px;
+}
+#main-body button {
+    position: absolute;
+    bottom: 10px;
+    right: 24px;
+    height: 30px;
+    width: 60px;
+    background: aqua;
+}
+
+#main-body textarea {
+    width: 780px;
+    bottom: 10px;
+    position: absolute;
+    resize: none;
+    font-size: 16px;
+}
+
+#content {
+    background: aliceblue;
+    height: 260px;
+    width: 780px;
+    border: 1px solid #F2EEab;
+    overflow-x: auto;
+}
+#content p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#con {
+    left: 920px;
+    width: 200px;
+    position: absolute;
+    background: aqua;
+    height: 400px;
+    text-align: center;
+}
+.online {
+    color: white;
+    border: 1px dotted red;
+    cursor: pointer;
+
+}
