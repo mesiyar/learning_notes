@@ -52,6 +52,9 @@ class DelayList
             $sleep = $ttr - time();
             if($sleep > 0 ) {
                 sleep($sleep);
+            } else {
+                echo "消息已过期".PHP_EOL;
+                continue;
             }
 
             echo "job_id [{$val['job_id']} job_msg[{$val['job_info']}]".PHP_EOL;
