@@ -1,3 +1,5 @@
+<?php
+
 /**
  * http 代理服务器
  * Class Proxy
